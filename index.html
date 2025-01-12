@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Screen</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: url('background.png') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            position: relative;
+            font-family: Arial, sans-serif;
+        }
+        .loading-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 40px;
+            background-color: #333;
+            border: 2px solid #555;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .loading-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #ff4500, #ff8c00, #ff4500);
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+        .loading-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #f3f3f3;
+            font-size: 24px;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="loading-bar" id="loading-bar"></div>
+        <div class="loading-text" id="loading-text">Loading...</div>
+    </div>
+    <audio autoplay>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+        window.addEventListener('load', function() {
+            var loadingBar = document.getElementById('loading-bar');
+            var loadingText = document.getElementById('loading-text');
+            var width = 0;
+            var interval = setInterval(function() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    loadingText.style.display = 'none';
+                } else {
+                    width++;
+                    loadingBar.style.width = width + '%';
+                    loadingText.innerText = 'Loading... ' + width + '%';
+                }
+            }, 350); // Adjust the speed of the loading bar here
+        });
+    </script>
+</body>
+</html>
